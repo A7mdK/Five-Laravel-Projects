@@ -1,12 +1,16 @@
-<h1>
-Hello I am a blade tamplate / homepage
-</h1>
+@extends('layouts.app')
 
-{{--
-@isset($name)
-    <div>The name is: {{ $name }}</div>
-@endisset
---}}
+@section('title', 'Hello I am a blade template / homepage')
+
+@section('content')
+    @forelse ($tasks as $task)
+        <div>
+            <a href="{{ route('tasks.show', ['id'=>$task->id]) }}">{{ $task->title }}</a>
+        </div>
+    @empty
+        <div>There are not tasks!</div>
+    @endforelse
+@endsection
 
 {{--
 <div>
@@ -20,12 +24,8 @@ Hello I am a blade tamplate / homepage
 </div>
 --}}
 
-<div>
-    @forelse ($tasks as $task)
-        <div>
-            <a href="{{ route('tasks.show', ['id'=>$task->id]) }}">{{ $task->title }}</a>
-        </div>
-    @empty
-        <div>There are not tasks!</div>
-    @endforelse
-</div>
+{{--
+@isset($name)
+    <div>The name is: {{ $name }}</div>
+@endisset
+--}}
